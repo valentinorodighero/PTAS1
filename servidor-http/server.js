@@ -15,3 +15,5 @@ server.on('request', (req, res) => {
 server.listen(porta, ()=> {
     console.log(`Servidor ouvindo na porta ${porta}`)
 });
+
+// O site não carrega, pois a aplicação precisa de uma resposta para mostrar algo na tela

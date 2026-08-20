@@ -48,6 +48,7 @@ const server = http.createServer((req, res) => {
         res.end(JSON.stringify({ "data": "Erro 404 - Página não encontrada" }))
     }
 
+    console.log(`Requisição recebida! ${req.method} ${req.url}`)
 });
 
 server.listen(port, () => {

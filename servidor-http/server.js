@@ -18,7 +18,6 @@ const produtos = [
 
 const server = http.createServer((req, res) => {
     const urlObj = new URL(req.url, `http://${req.headers.host}`)
-    res.statusCode = 200;
     res.setHeader('Content-Type', 'application/json');
 
     if (req.method == "GET" && urlObj.pathname == "/contato") {
@@ -26,17 +25,29 @@ const server = http.createServer((req, res) => {
             "numero_telefone": "67 99999-9999",
             "endereco": "Rua da Alegria, 99"
         }));
+        res.statusCode = 200;
     }
 
     if (req.method == "GET" && urlObj.pathname == "/produtos") {
         return res.end(JSON.stringify(produtos));
+        res.statusCode = 200;
     }
 
     if (req.method == "GET" && urlObj.pathname == "/status") {
         return res.end(JSON.stringify(status))
+        res.statusCode = 200;
     }
 
-    res.end(JSON.stringify({ "data": "Página Inicial" }));
+    if (req.method == "GET" && urlObj.pathname == "/") {
+        res.statusCode = 200;
+        res.end(JSON.stringify({ "data": "Página Inicial" }));
+    }
+
+    else {
+        res.statusCode = 404;
+        res.end(JSON.stringify({ "data": "Erro 404 - Página não encontrada" }))
+    }
+
 });
 
 server.listen(port, () => {
